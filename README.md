@@ -14,3 +14,5 @@ http://localhost:8080/api/races/season/2010
 http://localhost:8080/api/races/season/2020/12
 http://localhost:8080/api/races/circuits/spa
 http://localhost:8080/api/races/circuits/monza/season/2018/2020
+http://localhost:8080/api/results/11
+http://localhost:8080/api/results/driver/sato

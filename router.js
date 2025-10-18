@@ -128,29 +128,32 @@ app.get('/api/races/circuits/:ref/season/:start/:end', async (req, resp) => {
     resp.send(data)
 })
 
-// left off on this one
 app.get('/api/results/:raceId', async (req, resp) => {
     const {data, err} = await supabase
         .from('results')
-        .select('driver (driverRef, code, forename, surname), race (name, round, year, date), constructor (name, constructorRef, nationality)')
+        .select('grid, drivers (driverRef, code, forename, surname), races (name, round, year, date), constructors (name, constructorRef, nationality)')
         .eq('raceId', req.params.raceId)
         .order('grid', {ascending: true})
     resp.send(data)
 })
 
-app.get('', async (req, resp) => {
+app.get('/api/results/driver/:ref', async (req, resp) => {
     const {data, err} = await supabase
-        .from()
-        .select()
-
+        .from('results')
+        .select('resultId, raceId, positionOrder, drivers!inner (driverRef, forename, surname)')
+        .eq('drivers.driverRef', req.params.ref)
     resp.send(data)
 })
 
-app.get('', async (req, resp) => {
+// left off here
+app.get('/api/results/drivers/:ref/seasons/:start/:end', async (req, resp) => {
     const {data, err} = await supabase
-        .from()
-        .select()
-
+        .from('results')
+        .select('resultId, raceId, races!inner (year, date), positionOrder, drivers (driverRef, forename, surname)')
+        .eq('drivers.driverRef', req.params.ref)
+        .gte('races.year', req.params.start)
+        .lte('races.year', req.params.end)
+        .order('races.date', {referencedTable: 'results', ascending:true})
     resp.send(data)
 })
 
