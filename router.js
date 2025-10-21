@@ -443,6 +443,7 @@ app.get('/api/standings/constructors/:raceId', async (req, resp) => {
     }
 })
 
+const port = process.env.PORT
 app.listen(8080, () => {
-    console.log('listening on port 8080');
+    console.log('Listening on port: ' + port);
 });
