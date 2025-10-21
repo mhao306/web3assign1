@@ -2,7 +2,7 @@ const express = require('express');
 const supa = require('@supabase/supabase-js');
 const app = express();
 
-const supabase = supa.createClient(process.env.supaUrl, process.env.supaAnonKey);
+const supabase = supa.createClient(process.env.supabaseURL, process.env.supaAnonKey);
 
 app.get('/api/circuits', async (req, resp) => {
     try {
